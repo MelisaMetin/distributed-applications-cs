@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+
+    .centered-text {
+        text-align: center;
+    }
+
+    #tripImage {
+        max-width: 200px; 
+        display: block; 
+        margin: 0 auto; 
+        cursor: pointer; 
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleTable = document.getElementById("toggleTable");
+        const tripTable = document.getElementById("tripTable");
+
+        document.getElementById("tripImage").addEventListener("click", function () {
+            if (tripTable.classList.contains("hidden")) {
+                tripTable.classList.remove("hidden");
+                toggleTable.textContent = "Hide Details";
+            } else {
+                tripTable.classList.add("hidden");
+                toggleTable.textContent = "Click me to see the Trips";
+            }
+        });
+    });
+</script>
+
+<div class="header text-center bg-dark text-light py-5">
+    <h1>Welcome to Trip Mate</h1>
+    <p class="lead">Discover trips to your destination and find new mates!</p>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Featured Trips</h2>
+    <div class="row">
+        <div class="col-md-12 mb-4 centered-text">
+            <p id="toggleTable" class="btn btn-link">Click me to see the Trips</p>
+        </div>
+        <div class="col-md-12 mb-4 centered-text">
+            <img id="tripImage" src="https://media.istockphoto.com/id/585769688/vector/two-boys-in-a-car.jpg?s=612x612&w=0&k=20&c=L_yGujbKQGh-SYK0KebqGsQFatZgiv5EtEHOkf1ouYs=" class="card-img-top" alt="Trip Image">
+        </div>
+        <div class="col-md-12 mb-4 centered-text">
+            <table id="tripTable" class="hidden table table-striped">
+                 <thead>
+                     <tr>
+                         <th>Driver Name</th>
+                         <th>Last Name</th>
+                         <th>Email</th>
+                         <th>Phone</th>
+                         <th>Car</th>
+                         <th>From City</th>
+                         <th>To City</th>
+                         <th>Departure Date Time</th>
+                         <th>Available Seats</th>
+                         <th>Rating</th>
+                         <th>Weather</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                         <td>@(Model.DriverFirstName ?? "N/A")&nbsp;</td>
+                         <td>@(Model.DriverLastName ?? "N/A")&nbsp;</td>
+                         <td>@(Model.DriverEmail ?? "N/A")&nbsp;</td>
+                         <td>@Model.DriverPhone</td>
+                         <td>@(Model.DriverCar ?? "N/A")&nbsp;</td>
+
+                         <td>@(Model.FromCity ?? "N/A")&nbsp;</td>
+                         <td>@(Model.ToCity ?? "N/A")&nbsp;</td>
+                         <td>@(Model.DepartureDateTime != DateTime.MinValue ? Model.DepartureDateTime.ToString("MM/dd/yyyy HH:mm:ss") : "N/A")&nbsp;</td>
+                         <td>@(Model.AvailableSeats) &nbsp;</td>
+                         <td>@(Model.Rating) &nbsp;</td> 
+                         <td>@(Model.WeatherDescription ?? "Weather information not available")&nbsp;</td>
+
+                     </tr>
+                 </tbody>
+             </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="footer bg-dark text-light py-3">
+    <div class="container text-center">
+        <p>&copy; 2023 TripMate Company. All rights reserved.</p>
+    </div>
+</div>
